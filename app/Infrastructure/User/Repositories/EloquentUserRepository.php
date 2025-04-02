@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Domain\User\Repositories;
+namespace App\Infrastructure\User\Repositories;
 
 use App\Domain\User\DTOs\UserData;
 use App\Domain\User\Exceptions\UserNotFoundException;
 use App\Domain\User\Models\User;
+use App\Domain\User\Repositories\UserRepository;
 use Illuminate\Support\Facades\Hash;
 
-class EloquentUserRepository implements UserRepositoryInterface
+class EloquentUserRepository extends UserRepository
 {
     public function findById(int $id): ?User
     {
