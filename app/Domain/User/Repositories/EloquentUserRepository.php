@@ -61,8 +61,8 @@ class EloquentUserRepository implements UserRepositoryInterface
         return $user->delete();
     }
 
-    public function getAll(): array
+    public function getAll(): \Illuminate\Database\Eloquent\Collection
     {
-        return User::all()->toArray();
+        return User::all();
     }
 }

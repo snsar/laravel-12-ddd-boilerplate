@@ -1,6 +1,7 @@
 <?php
 
 use App\Interface\Api\Controllers\UserController;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 // Route cho API v1
@@ -13,6 +14,11 @@ Route::group(['prefix' => 'v1', 'as' => 'api.v1.'], function () {
         // Route::post('login', [AuthController::class, 'login']);
         // Route::post('register', [AuthController::class, 'register']);
         // Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+    });
+
+    Route::get('test', function () {
+        Log::info('Test route called');
+        return 'Hello World';
     });
 
     // Thêm các nhóm route cho các domain khác

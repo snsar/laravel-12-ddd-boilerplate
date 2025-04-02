@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 // Trang chủ
 Route::get('/', function () {
-    return 'Hello World';
-    // return view('welcome');
+    // return 'Hello World';
+    return view('welcome');
 })->name('home');
 
 // Nhóm route cho người dùng - dùng resource controller khi cần

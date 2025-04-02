@@ -49,7 +49,7 @@ class UserService
         return $this->userRepository->delete($id);
     }
 
-    public function getAll(): array
+    public function getAll(): \Illuminate\Database\Eloquent\Collection
     {
         return $this->userRepository->getAll();
     }

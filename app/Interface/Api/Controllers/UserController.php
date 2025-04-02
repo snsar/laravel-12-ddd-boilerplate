@@ -6,27 +6,28 @@ use App\Application\User\Requests\CreateUserRequest;
 use App\Application\User\Requests\UpdateUserRequest;
 use App\Application\User\Resources\UserResource;
 use App\Application\User\UseCases\CreateUserUseCase;
+use App\Application\User\UseCases\DeleteUserUseCase;
+use App\Application\User\UseCases\GetAllUsersUseCase;
 use App\Application\User\UseCases\GetUserUseCase;
 use App\Application\User\UseCases\UpdateUserUseCase;
 use App\Domain\User\Exceptions\UserNotFoundException;
-use App\Domain\User\Services\UserService;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-class UserController extends Controller
+class UserController
 {
     public function __construct(
         private CreateUserUseCase $createUserUseCase,
         private GetUserUseCase $getUserUseCase,
         private UpdateUserUseCase $updateUserUseCase,
-        private UserService $userService
+        private GetAllUsersUseCase $getAllUsersUseCase,
+        private DeleteUserUseCase $deleteUserUseCase
     ) {}
 
     public function index(): AnonymousResourceCollection
     {
-        $users = $this->userService->getAll();
+        $users = $this->getAllUsersUseCase->execute();
 
         return UserResource::collection($users);
     }
@@ -65,7 +66,7 @@ class UserController extends Controller
     public function destroy(int $id): JsonResponse
     {
         try {
-            $this->userService->delete($id);
+            $this->deleteUserUseCase->execute($id);
 
             return response()->json(null, 204);
         } catch (UserNotFoundException $e) {

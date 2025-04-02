@@ -17,5 +17,5 @@ interface UserRepositoryInterface
 
     public function delete(int $id): bool;
 
-    public function getAll(): array;
+    public function getAll(): \Illuminate\Database\Eloquent\Collection;
 }
